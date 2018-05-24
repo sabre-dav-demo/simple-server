@@ -62,6 +62,8 @@ script:
 
 after_script:
 - ls --almost-all --color
+- ls --almost-all --color data
+- ls --almost-all --color public
 
 
 - composer show --latest
