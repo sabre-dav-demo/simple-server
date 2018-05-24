@@ -49,8 +49,8 @@ before_script:
 script:
 - php -S localhost:8000 server.php&
 - sleep 1
-- elink -dump localhost:8000
-- elinks -dump-color-mode 4 -dump localhost:8000
+- links -dump http://localhost:8000
+- elinks -dump-color-mode 4 -dump http://localhost:8000
 - cadaver http://localhost:8000
 
 
