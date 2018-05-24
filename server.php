@@ -7,10 +7,10 @@ use
 require 'vendor/autoload.php';
 
 // Now we're creating a whole bunch of objects
-$rootDirectory = new DAV\FS\Directory('public');
+// $rootDirectory = ;
 
 // The server object is responsible for making sense out of the WebDAV protocol
-$server = new DAV\Server($rootDirectory);
+$server = new DAV\Server(new DAV\FS\Directory('public'));
 
 // If your server is not on your webroot, make sure the following line has the
 // correct information
@@ -18,9 +18,9 @@ $server->setBaseUri('/');
 
 // The lock manager is reponsible for making sure users don't overwrite
 // each others changes.
-$lockBackend = new DAV\Locks\Backend\File('data/locks');
-$lockPlugin = new DAV\Locks\Plugin($lockBackend);
-$server->addPlugin($lockPlugin);
+// $lockBackend = ;
+// $lockPlugin = ;
+$server->addPlugin(new DAV\Locks\Plugin(new DAV\Locks\Backend\File('data/locks')));
 
 // This ensures that we get a pretty index in the browser, but it is
 // optional.
