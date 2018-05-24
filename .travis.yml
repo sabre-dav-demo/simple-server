@@ -40,7 +40,7 @@ before_install:
 - chmod a+rwx data public
 
 install:
-composer require sabre/dav
+- composer require sabre/dav
 # - composer install
 
 before_script:
