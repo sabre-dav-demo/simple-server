@@ -34,14 +34,12 @@ before_install:
   fi
 
 
-before_install:
+install:
 - mkdir data
 - mkdir public
 - chmod a+rwx data public
-
-install:
 - composer require sabre/dav
-# - composer install
+
 
 before_script:
 - curl_security_check composer.lock
