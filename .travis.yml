@@ -58,9 +58,9 @@ script:
     put LICENSE
     put README.md
     put server.php
-    put LICENSE /dev/null
-    put README.md /dev/null
-    put server.php /dev/null
+    get LICENSE /dev/null
+    get README.md /dev/null
+    get server.php /dev/null
     ls
     delete server.php
     ls
