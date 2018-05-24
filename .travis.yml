@@ -55,6 +55,14 @@ script:
   cadaver http://localhost:8000 <<- EOT
     unset quiet
     pwd
+    put LICENSE
+    put README.md
+    put server.php
+    put LICENSE /dev/null
+    put README.md /dev/null
+    put server.php /dev/null
+    ls
+    delete server.php
     ls
     quit
   EOT
