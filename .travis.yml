@@ -51,7 +51,13 @@ script:
 - sleep 1
 - links -dump http://localhost:8000
 - elinks -dump-color-mode 4 -dump http://localhost:8000
-- cadaver http://localhost:8000
+- |
+  cat | cadaver http://localhost:8000 << EOT
+  set quiet off
+  pwd
+  ls
+  quit
+  EOT
 
 
 after_script:
