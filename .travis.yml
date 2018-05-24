@@ -52,17 +52,16 @@ script:
 - links -dump http://localhost:8000
 - elinks -dump-color-mode 4 -dump http://localhost:8000
 - |
-  cadaver http://localhost:8000 << EOT
-  unset quiet
-  pwd
-  ls
-  quit
+  cadaver http://localhost:8000 <<- EOT
+    unset quiet
+    pwd
+    ls
+    quit
   EOT
 
 
 after_script:
 - ls --almost-all --color
-- ls --almost-all --color skeleton
 
 
 - composer show --latest
