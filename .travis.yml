@@ -50,8 +50,14 @@ script:
 # - php -S localhost:8000 server.php > /dev/null & ps $!
 # - curl --retry 10 
 # - php -S localhost:8000 server.php & ps $! ; w3m http://localhost:8000 -dump
-- php -S localhost:8000 & ps $! ; curl localhost:8000 --retry 10 | w3m -T text/html -dump
+# - php -S localhost:8000 & ps $! ; curl localhost:8000 --retry 10 --retry-connrefused | w3m -T text/html -dump
 # curl: option --retry-connrefused: is unknown
+- |
+  php -S localhost:8000 & ps $!
+  printf 'HEAD / HTTP/1.1\r\nHost: localhost\r\n\r\n' |\
+  time socat - TCP4:localhost:8000,forever |\
+  grep ^Server:
+- w3m http://localhost:8000 -o display_link_number=1
 - links -dump http://localhost:8000
 - elinks -dump-color-mode 4 -dump http://localhost:8000
 - |
