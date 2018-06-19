@@ -79,12 +79,13 @@ script:
     ls
     quit
   EOT
-- curl --request PROPFIND localhost:8000
-- curl --request PROPFIND localhost:8000/LICENSE
-- curl localhost:8000/LICENSE | head
-- curl --request DELETE localhost:8000/README.md
-- curl --request MKCOL 'localhost:8000/very_new_folder'
-- curl --request MOVE --header 'Destination:localhost:8000/new_folder' 'localhost:8000/very_new_folder'
+- curl --request PROPFIND localhost:8000 | head --lines=2
+- curl --request PROPFIND localhost:8000/LICENSE | head --lines=2
+- curl localhost:8000/LICENSE | head --lines=1
+- curl --request DELETE localhost:8000/README.md -sw '%{http_code}'
+- curl --request MKCOL 'localhost:8000/very_very_new_folder' -sw '%{http_code}'
+- curl --request MOVE --header 'Destination:http://localhost:8000/very_new_folder' 'localhost:8000/very_very_new_folder'
+- curl --request MOVE --header 'Destination:http://localhost:8000/new_folder' 'localhost:8000/very_new_folder' -sw '%{http_code}'
 - curl -T 'server.php' 'localhost:8000/new_folder'
 
 
