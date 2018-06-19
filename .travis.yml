@@ -53,7 +53,7 @@ script:
 # - php -S localhost:8000 & ps $! ; curl localhost:8000 --retry 10 --retry-connrefused | w3m -T text/html -dump
 # curl: option --retry-connrefused: is unknown
 - |
-  php -S localhost:8000 & ps $!
+  php -S localhost:8000 server.php & ps $!
   printf 'HEAD / HTTP/1.1\r\nHost: localhost\r\n\r\n' |\
   time socat - TCP4:localhost:8000,forever |\
   grep ^Server:
