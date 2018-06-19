@@ -82,11 +82,14 @@ script:
 - curl --request PROPFIND localhost:8000 | head --lines=2
 - curl --request PROPFIND localhost:8000/LICENSE | head --lines=2
 - curl localhost:8000/LICENSE | head --lines=1
-- curl --request DELETE localhost:8000/README.md -sw '%{http_code}'
-- curl --request MKCOL 'localhost:8000/very_very_new_folder' -sw '%{http_code}'
+- curl --request DELETE localhost:8000/README.md -sw '%{http_code}' | grep '^2..$'
+- curl --request MKCOL 'localhost:8000/very_very_new_folder' -sw '%{http_code}' | grep '^2..$'
 - curl --request MOVE --header 'Destination:http://localhost:8000/very_new_folder' 'localhost:8000/very_very_new_folder'
-- curl --request MOVE --header 'Destination:http://localhost:8000/new_folder' 'localhost:8000/very_new_folder' -sw '%{http_code}'
-- curl -T 'server.php' 'localhost:8000/new_folder'
+- curl --request MOVE --header 'Destination:http://localhost:8000/new_folder' 'localhost:8000/very_new_folder' -sw '%{http_code}' | grep '^2..$'
+- curl -T 'server.php' 'localhost:8000/new_folder' # PUT is not allowed on non-files.
+- curl -T 'server.php' 'localhost:8000/new_folder' -sw '%{http_code}' | grep '^2..$'
+- curl -T 'server.php' 'localhost:8000/new_folder/server.php'
+- curl -T 'server.php' 'localhost:8000/server.php' -sw '%{http_code}' | grep '^2..$'
 
 
 after_script:
