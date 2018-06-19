@@ -80,7 +80,7 @@ script:
     ls
     quit
   EOT
-- curl --request PROPFIND localhost:8000 | head --lines=2
+- curl --request PROPFIND localhost:8000 2>&1 >/dev/null | head --lines=2
 - |
   curl --request PROPFIND localhost:8000 --include --upload-file - -H "Depth: 1" <<end
   <?xml version="1.0"?>
