@@ -5,6 +5,7 @@ addons:
   apt:
     packages:
     - cadaver
+    - libxml2-utils # xmllint
     - links
     - elinks
 
@@ -97,7 +98,7 @@ script:
 - curl --request MOVE --header 'Destination:http://localhost:8000/very_new_folder' 'localhost:8000/very_very_new_folder'
 - curl --request MOVE --header 'Destination:http://localhost:8000/new_folder' 'localhost:8000/very_new_folder' -sw '%{http_code}' | grep '^2..$'
 - curl -T 'server.php' 'localhost:8000/new_folder' # PUT is not allowed on non-files.
-- curl -T 'server.php' 'localhost:8000/new_folder' -sw '%{http_code}' | ! grep '^2..$'
+- curl -T 'server.php' 'localhost:8000/new_folder' -sw '%{http_code}' | grep '^4..$\|^5..$'
 - curl -T 'server.php' 'localhost:8000/new_folder/' -sw '%{http_code}' | grep '^2..$'
 - curl -T 'server.php' 'localhost:8000/new_folder/server.php' -sw '%{http_code}' | grep '^2..$'
 - curl -T 'server.php' 'localhost:8000/server.php' -sw '%{http_code}' | grep '^2..$'
