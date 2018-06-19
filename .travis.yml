@@ -79,6 +79,13 @@ script:
     ls
     quit
   EOT
+- curl --request PROPFIND localhost:8000
+- curl --request PROPFIND localhost:8000/LICENSE
+- curl localhost:8000/LICENSE | head
+- curl --request DELETE localhost:8000/README.md
+- curl --request MKCOL 'localhost:8000/very_new_folder'
+- curl --request MOVE --header 'Destination:localhost:8000/new_folder' 'localhost:8000/very_new_folder'
+- curl -T 'server.php' 'localhost:8000/new_folder'
 
 
 after_script:
