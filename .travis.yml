@@ -49,8 +49,8 @@ before_script:
 script:
 # - php -S localhost:8000 server.php > /dev/null & ps $!
 # - curl --retry 10 
-# - php -S localhost:8000 & ps $! ; curl --head --silent --retry 10 localhost:8000 --retry-connrefused | w3m -T text/html -dump
-- php -S localhost:8000 server.php & ps $! ; w3m http://localhost:8000 -dump
+# - php -S localhost:8000 server.php & ps $! ; w3m http://localhost:8000 -dump
+- php -S localhost:8000 & ps $! ; curl localhost:8000 --retry 10 --retry-connrefused | w3m -T text/html -dump
 - links -dump http://localhost:8000
 - elinks -dump-color-mode 4 -dump http://localhost:8000
 - |
