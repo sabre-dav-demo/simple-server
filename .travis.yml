@@ -23,6 +23,7 @@ matrix:
 
 
 before_install:
+- alias grep='grep --color=auto'
 - go get -u github.com/jingweno/ccat
 # - pip install --user pygments
 - wget https://github.com/travis-util/https-security-checker/archive/master.zip --output-document=- | jar xvf /dev/stdin
@@ -80,6 +81,13 @@ script:
     quit
   EOT
 - curl --request PROPFIND localhost:8000 | head --lines=2
+- |
+  curl --request PROPFIND localhost:8000 --include --upload-file - -H "Depth: 1" <<end
+  <?xml version="1.0"?>
+  <a:propfind xmlns:a="DAV:">
+    <a:prop><a:resourcetype/></a:prop>
+  </a:propfind>
+  end
 - curl --request PROPFIND localhost:8000/LICENSE | head --lines=2
 - curl localhost:8000/LICENSE | head --lines=1
 - curl --request DELETE localhost:8000/README.md -sw '%{http_code}' | grep '^2..$'
@@ -87,7 +95,7 @@ script:
 - curl --request MOVE --header 'Destination:http://localhost:8000/very_new_folder' 'localhost:8000/very_very_new_folder'
 - curl --request MOVE --header 'Destination:http://localhost:8000/new_folder' 'localhost:8000/very_new_folder' -sw '%{http_code}' | grep '^2..$'
 - curl -T 'server.php' 'localhost:8000/new_folder' # PUT is not allowed on non-files.
-- curl -T 'server.php' 'localhost:8000/new_folder' -sw '%{http_code}' | grep '^2..$'
+- curl -T 'server.php' 'localhost:8000/new_folder' -sw '%{http_code}' | grep '^5..$'
 - curl -T 'server.php' 'localhost:8000/new_folder/server.php'
 - curl -T 'server.php' 'localhost:8000/server.php' -sw '%{http_code}' | grep '^2..$'
 
