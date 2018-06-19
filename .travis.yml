@@ -81,9 +81,9 @@ script:
     ls
     quit
   EOT
-- curl --request PROPFIND localhost:8000 | xmllint --format -
+- curl --request PROPFIND localhost:8000 | xmllint --format - | grep '<d:href>.*</d:href>'
 - |
-  curl --request PROPFIND localhost:8000 --include --upload-file - -H "Depth: 1" <<end
+  curl --request PROPFIND localhost:8000 --include --upload-file - -H "Depth: 1" <<end | xmllint --format -
   <?xml version="1.0"?>
   <a:propfind xmlns:a="DAV:">
     <a:prop>
