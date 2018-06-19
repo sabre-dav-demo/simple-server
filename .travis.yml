@@ -12,6 +12,10 @@ cache:
   directories:
   - $HOME/.composer/cache/files
 
+env:
+  global:
+  - TIME="\n%e"
+
 matrix:
   fast_finish: true
   allow_failures:
@@ -55,8 +59,7 @@ script:
 - |
   php -S localhost:8000 server.php & ps $!
   printf 'HEAD / HTTP/1.1\r\nHost: localhost\r\n\r\n' |\
-  time socat - TCP4:localhost:8000,forever |\
-  grep ^Server:
+  time socat - TCP4:localhost:8000,forever
 - w3m http://localhost:8000 -dump -o display_link_number=1
 - links -dump http://localhost:8000
 - elinks -dump-color-mode 4 -dump http://localhost:8000
