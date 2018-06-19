@@ -91,7 +91,7 @@ script:
     </a:prop>
   </a:propfind>
   end
-- curl --request PROPFIND localhost:8000/LICENSE | head --lines=2
+- curl --request PROPFIND localhost:8000/LICENSE | xmllint --format -
 - curl localhost:8000/LICENSE | head --lines=1
 - curl --request DELETE localhost:8000/README.md -sw '%{http_code}' | grep '^2..$'
 - curl --request MKCOL 'localhost:8000/very_very_new_folder' -sw '%{http_code}' | grep '^2..$'
