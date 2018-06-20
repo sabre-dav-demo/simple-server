@@ -24,7 +24,7 @@ matrix:
 
 
 before_install:
-- alias grep='grep --color=auto'
+- alias grep='grep --color=always'
 - go get -u github.com/jingweno/ccat
 # - pip install --user pygments
 - wget https://github.com/travis-util/https-security-checker/archive/master.zip --output-document=- | jar xvf /dev/stdin
