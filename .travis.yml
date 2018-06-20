@@ -27,7 +27,7 @@ before_install:
 - alias grep='grep --color=always'
 - go get -u github.com/jingweno/ccat
 # - pip install --user pygments
-- wget https://github.com/travis-util/https-security-checker/archive/master.zip --output-document=- | jar xvf /dev/stdin
+- curl https://github.com/travis-util/https-security-checker/archive/master.zip --location --silent | jar xvf /dev/stdin
 - . https-security-checker-master/init-source.bash
 # Disabling Xdebug - Debugger and Profiler Tool for PHP
 - |
