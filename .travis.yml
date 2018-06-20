@@ -60,6 +60,7 @@ script:
 # curl: option --retry-connrefused: is unknown
 - |
   php -S localhost:8000 server.php > /dev/null & ps $!
+  sleep .1
   printf 'HEAD / HTTP/1.1\r\nHost: localhost\r\n\r\n' |\
   time socat - TCP4:localhost:8000,forever |\
   grep "^HTTP\|^X-Powered-By: \|^X-Sabre-Version: "
