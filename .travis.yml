@@ -8,6 +8,7 @@ addons:
     - libxml2-utils # xmllint
     - links
     - elinks
+    - socat
 
 cache:
   directories:
@@ -15,10 +16,11 @@ cache:
 
 php:
 - nightly
+- 7.4
 - 7.3
 # - 7.2
 - 7.0
-- 5.5
+# - 5.5
 
 env:
   global:
